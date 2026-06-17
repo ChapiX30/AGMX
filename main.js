@@ -1,11 +1,12 @@
 /**
  * Equipos y Servicios AG — sitio estático
- * Configure WHATSAPP_NUMBER, PORTAL_URL, PJLA_SITIO_URL y ACREDITACION_PDF_URL aquí.
+ * Configure WHATSAPP_NUMBER, CAREERS_EMAIL, PORTAL_URL, PJLA_SITIO_URL y ACREDITACION_PDF_URL aquí.
  */
 (function () {
   'use strict';
 
   const WHATSAPP_NUMBER = '528128742959';
+  const CAREERS_EMAIL = 'rrhh@equiposyserviciosag.com';
   const PJLA_SITIO_URL =
     'https://www.pjview.com/clients/pjl/pjla-accredited-labs.cfm?filterLaboratory=equipos+y+servicios&filterCertStatus=Active&OrderBy=company&OldOrderBy=company&PageNo=1';
   const ACREDITACION_PDF_URL = 'acreditacion-pjla.pdf';
@@ -104,6 +105,80 @@
     if (pdf) {
       pdf.href = ACREDITACION_PDF_URL;
       pdf.setAttribute('title', 'Certificado y alcance de acreditación (PDF)');
+    }
+  }
+
+  function wireCareersSection() {
+    const emailLink = document.getElementById('careers-email-link');
+    if (emailLink) {
+      emailLink.textContent = CAREERS_EMAIL;
+      emailLink.href = `mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent('Postulación — Bolsa de trabajo AG')}&body=${encodeURIComponent('Adjunto mi currículum para su consideración.\n\nNombre:\nTeléfono:\nPuesto de interés:\n')}`;
+    }
+
+    document.querySelectorAll('[data-careers-email]').forEach((el) => {
+      if (el.id !== 'careers-email-link') {
+        el.textContent = CAREERS_EMAIL;
+        el.href = `mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent('Postulación — Bolsa de trabajo AG')}`;
+      }
+    });
+
+    const forms = [
+      document.getElementById('careers-form-cv'),
+      document.getElementById('careers-form-full'),
+    ].filter(Boolean);
+
+    forms.forEach((form) => {
+      form.action = `https://formsubmit.co/${encodeURIComponent(CAREERS_EMAIL)}`;
+
+      let next = form.querySelector('input[name="_next"]');
+      if (!next) {
+        next = document.createElement('input');
+        next.type = 'hidden';
+        next.name = '_next';
+        form.appendChild(next);
+      }
+      next.value = `${window.location.origin}${window.location.pathname}?postulacion=ok#bolsa-trabajo`;
+
+      form.addEventListener('submit', (e) => {
+        const honey = form.querySelector('.careers-form__honey');
+        if (honey && honey.value.trim()) {
+          e.preventDefault();
+          return;
+        }
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          form.reportValidity();
+        }
+      });
+    });
+
+    const tabs = document.querySelectorAll('[data-careers-tab]');
+    const panels = document.querySelectorAll('.careers__panel');
+    if (!tabs.length) return;
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-careers-tab');
+        tabs.forEach((t) => {
+          const active = t === tab;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach((panel) => {
+          const show =
+            (target === 'cv' && panel.id === 'careers-panel-cv') ||
+            (target === 'full' && panel.id === 'careers-panel-full');
+          panel.classList.toggle('is-active', show);
+          panel.hidden = !show;
+        });
+      });
+    });
+
+    const note = document.getElementById('careers-form-note');
+    if (note && new URLSearchParams(window.location.search).get('postulacion') === 'ok') {
+      note.hidden = false;
+      note.textContent =
+        'Gracias por su postulación. Hemos recibido su información y nos pondremos en contacto pronto.';
     }
   }
 
@@ -256,6 +331,48 @@
     const header = document.getElementById('site-header');
     if (!header) return;
     document.documentElement.style.setProperty('--site-header-h', header.offsetHeight + 'px');
+  }
+
+  function initMobileNav() {
+    const nav = document.querySelector('.site-nav');
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    if (!nav || !toggle || !menu) return;
+
+    const mq = window.matchMedia('(min-width: 640px)');
+
+    function setOpen(open) {
+      nav.classList.toggle('is-menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+      body.classList.toggle('nav-menu-open', open && !mq.matches);
+      setHeaderHeight();
+    }
+
+    function closeMenu() {
+      setOpen(false);
+    }
+
+    toggle.addEventListener('click', () => {
+      setOpen(!nav.classList.contains('is-menu-open'));
+    });
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('is-menu-open')) {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    mq.addEventListener('change', () => {
+      if (mq.matches) closeMenu();
+    });
+
+    window.addEventListener('resize', setHeaderHeight, { passive: true });
   }
 
   const CATALOG_SECTION_IDS = [
@@ -701,11 +818,13 @@
 
   wireWhatsAppLinks();
   wireAcreditacionLinks();
+  wireCareersSection();
   initWaAssistant();
   setHeaderHeight();
   initCatalogView();
   initPanels();
   initNavScroll();
+  initMobileNav();
   initFooterLinks();
   initStagger();
   initHeroMedia();

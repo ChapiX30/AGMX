@@ -220,10 +220,17 @@
                     <span class="brand__legal">S.A. DE C.V.</span>
                 </span>
             </a>
-            <div class="nav-links">
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú de navegación">
+                <span class="nav-toggle__bar" aria-hidden="true"></span>
+                <span class="nav-toggle__bar" aria-hidden="true"></span>
+                <span class="nav-toggle__bar" aria-hidden="true"></span>
+            </button>
+            <div id="nav-menu" class="nav-links">
                 <a href="#servicios" class="nav-pro-trigger">Servicios</a>
                 <span class="nav-sep" aria-hidden="true">/</span>
                 <a href="#equipos" class="nav-pro-trigger">Equipos</a>
+                <span class="nav-sep" aria-hidden="true">/</span>
+                <a href="#bolsa-trabajo" class="nav-pro-trigger">Bolsa de trabajo</a>
                 <span class="nav-sep" aria-hidden="true">/</span>
                 <a href="#contacto" class="nav-pro-trigger">Contacto</a>
                 <span class="nav-divider" aria-hidden="true"></span>
@@ -663,7 +670,7 @@
         </section>
 
 
-        <section class="faq reveal" aria-labelledby="titulo-faq">
+        <section id="faq" class="faq reveal" aria-labelledby="titulo-faq">
             <div class="faq__inner">
                 <header class="faq__header">
                     <p class="section-eyebrow">Preguntas frecuentes</p>
@@ -686,6 +693,128 @@
                         <summary class="faq__question">¿Atienden fuera de Monterrey?</summary>
                         <p class="faq__answer">Sí. Damos servicio en Monterrey, García y zona metropolitana. Para otras ubicaciones, cotice logística y alcance con nuestro equipo.</p>
                     </details>
+                </div>
+            </div>
+        </section>
+
+        <section id="bolsa-trabajo" class="section section--white reveal" aria-labelledby="titulo-bolsa">
+            <div class="section__inner careers">
+                <header class="careers__header">
+                    <p class="section-eyebrow">Únete al equipo</p>
+                    <h2 id="titulo-bolsa" class="careers__title">Bolsa de trabajo</h2>
+                    <p class="careers__lead">Forme parte de un laboratorio acreditado ISO/IEC 17025. Buscamos talento técnico con pasión por la metrología y el servicio a la industria.</p>
+                </header>
+
+                <div class="careers__layout">
+                    <aside class="careers__info">
+                        <div class="careers__card">
+                            <h3 class="careers__card-title">¿Por qué trabajar en AG?</h3>
+                            <ul class="careers__list">
+                                <li>Ambiente técnico especializado en metrología industrial</li>
+                                <li>Procesos bajo norma ISO/IEC 17025:2017</li>
+                                <li>Capacitación continua y crecimiento profesional</li>
+                                <li>Prestaciones de ley y esquema competitivo</li>
+                            </ul>
+                        </div>
+
+                        <div class="careers__card">
+                            <h3 class="careers__card-title">Perfiles que buscamos</h3>
+                            <ul class="careers__tags">
+                                <li>Técnico metrólogo</li>
+                                <li>Ingeniero de calibración</li>
+                                <li>Auxiliar de laboratorio</li>
+                                <li>Ejecutivo comercial industrial</li>
+                                <li>Administración y recepción</li>
+                            </ul>
+                        </div>
+
+                        <div class="careers__email-box">
+                            <p class="careers__email-label">¿Prefiere enviar su CV directamente?</p>
+                            <p class="careers__email-text">Envíe su currículum a:</p>
+                            <a href="#" id="careers-email-link" class="careers__email" data-careers-email></a>
+                            <p class="careers__email-hint">Al hacer clic se abrirá su correo con el asunto listo. Adjunte su CV en PDF o Word.</p>
+                        </div>
+                    </aside>
+
+                    <div class="careers__apply">
+                        <div class="careers__tabs" role="tablist" aria-label="Forma de postulación">
+                            <button type="button" class="careers__tab is-active" role="tab" id="careers-tab-cv" aria-selected="true" aria-controls="careers-panel-cv" data-careers-tab="cv">Solo currículum</button>
+                            <button type="button" class="careers__tab" role="tab" id="careers-tab-full" aria-selected="false" aria-controls="careers-panel-full" data-careers-tab="full">Formulario completo</button>
+                        </div>
+
+                        <div id="careers-panel-cv" class="careers__panel is-active" role="tabpanel" aria-labelledby="careers-tab-cv">
+                            <form id="careers-form-cv" class="careers-form" method="post" enctype="multipart/form-data" novalidate>
+                                <input type="hidden" name="_subject" value="Postulación — Solo currículum (AG)">
+                                <input type="hidden" name="_template" value="table">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="text" name="_honey" class="careers-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                                <div class="careers-form__grid">
+                                    <div class="careers-form__field">
+                                        <label for="cv-nombre">Nombre completo</label>
+                                        <input type="text" id="cv-nombre" name="nombre" required autocomplete="name" placeholder="Ej. Juan Pérez García">
+                                    </div>
+                                    <div class="careers-form__field">
+                                        <label for="cv-email">Correo electrónico</label>
+                                        <input type="email" id="cv-email" name="email" required autocomplete="email" placeholder="tu@correo.com">
+                                    </div>
+                                    <div class="careers-form__field">
+                                        <label for="cv-telefono">Teléfono</label>
+                                        <input type="tel" id="cv-telefono" name="telefono" required autocomplete="tel" placeholder="81 0000 0000">
+                                    </div>
+                                    <div class="careers-form__field careers-form__field--full">
+                                        <label for="cv-archivo">Currículum (PDF o Word)</label>
+                                        <input type="file" id="cv-archivo" name="attachment" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+                                        <span class="careers-form__hint">Máximo recomendado: 5 MB</span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn--gradient btn--lg careers-form__submit">Enviar currículum</button>
+                            </form>
+                        </div>
+
+                        <div id="careers-panel-full" class="careers__panel" role="tabpanel" aria-labelledby="careers-tab-full" hidden>
+                            <form id="careers-form-full" class="careers-form" method="post" enctype="multipart/form-data" novalidate>
+                                <input type="hidden" name="_subject" value="Postulación — Formulario completo (AG)">
+                                <input type="hidden" name="_template" value="table">
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="text" name="_honey" class="careers-form__honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                                <div class="careers-form__grid">
+                                    <div class="careers-form__field">
+                                        <label for="full-nombre">Nombre completo</label>
+                                        <input type="text" id="full-nombre" name="nombre" required autocomplete="name">
+                                    </div>
+                                    <div class="careers-form__field">
+                                        <label for="full-email">Correo electrónico</label>
+                                        <input type="email" id="full-email" name="email" required autocomplete="email">
+                                    </div>
+                                    <div class="careers-form__field">
+                                        <label for="full-telefono">Teléfono</label>
+                                        <input type="tel" id="full-telefono" name="telefono" required autocomplete="tel">
+                                    </div>
+                                    <div class="careers-form__field">
+                                        <label for="full-puesto">Puesto de interés</label>
+                                        <input type="text" id="full-puesto" name="puesto" required placeholder="Ej. Técnico metrólogo">
+                                    </div>
+                                    <div class="careers-form__field careers-form__field--full">
+                                        <label for="full-experiencia">Experiencia y formación</label>
+                                        <textarea id="full-experiencia" name="experiencia" rows="4" required placeholder="Resuma su experiencia, estudios y certificaciones relevantes."></textarea>
+                                    </div>
+                                    <div class="careers-form__field careers-form__field--full">
+                                        <label for="full-mensaje">Mensaje adicional (opcional)</label>
+                                        <textarea id="full-mensaje" name="mensaje" rows="3" placeholder="Disponibilidad, expectativa salarial, etc."></textarea>
+                                    </div>
+                                    <div class="careers-form__field careers-form__field--full">
+                                        <label for="full-archivo">Adjuntar currículum (opcional)</label>
+                                        <input type="file" id="full-archivo" name="attachment" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn--gradient btn--lg careers-form__submit">Enviar postulación</button>
+                            </form>
+                        </div>
+
+                        <p class="careers__form-note" id="careers-form-note" hidden role="status"></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -969,6 +1098,14 @@
                     <a href="#catalogo" data-open-catalog>Catálogo de magnitudes</a>
                     <a href="#equipos">Venta de equipos</a>
                     <a href="#acreditacion">Acreditación PJLA</a>
+                </nav>
+            </div>
+            <div class="site-footer__col">
+                <h3 class="site-footer__heading">Empresa</h3>
+                <nav class="site-footer__nav" aria-label="Empresa">
+                    <a href="#bolsa-trabajo">Bolsa de trabajo</a>
+                    <a href="#acreditacion">Acreditación PJLA</a>
+                    <a href="#faq">Preguntas frecuentes</a>
                 </nav>
             </div>
             <div class="site-footer__col">
