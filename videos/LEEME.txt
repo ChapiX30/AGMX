@@ -1,0 +1,35 @@
+VIDEO DE FONDO DEL HERO (opcional)
+==================================
+
+IMPORTANTE: usa video REAL del laboratorio (instrumentos, calibración).
+NO uses capturas de pantalla de Excel, Monday u otros programas.
+
+El VIDEO tiene prioridad en el inicio de la página.
+Si existe videos/laboratorio.mp4, se reproduce ahí.
+La foto laboratorio.jpg es solo para la sección Servicios.
+
+1) Pon aquí tu video con el nombre: laboratorio.mp4
+
+2) Requisitos recomendados
+   - Formato: MP4 (H.264)
+   - Duración: 10–30 segundos (se repite en bucle)
+   - Sin audio necesario (el sitio lo reproduce en silencio)
+   - Resolución: 1920×1080 o 1280×720
+   - Peso: intenta menos de 5 MB para que cargue rápido
+   - El sitio aplica blur y overlay azul para que no distraiga
+
+3) Si usas otro nombre de archivo
+   En index.html busca: videos/laboratorio.mp4
+   y cámbialo por: videos/tu-video.mp4
+
+4) Si NO quieres video de fondo
+   En index.html borra solo la etiqueta <video>...</video>
+   dentro del bloque "FONDO DEL HERO".
+
+5) Abre la página con un servidor local (no solo doble clic):
+   - En la carpeta "pagina", clic derecho → "Abrir en Terminal"
+   - Escribe: python -m http.server 8080
+   - Abre el navegador en: http://localhost:8080
+
+6) Recarga con Ctrl + F5 si no ves el video de inmediato
+   (el archivo pesa ~22 MB y tarda unos segundos en cargar)

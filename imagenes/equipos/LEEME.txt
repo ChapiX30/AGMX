@@ -1,0 +1,21 @@
+CARRUSEL — SECCIÓN EQUIPOS
+==========================
+
+1. Pon tus fotos AQUÍ (imagenes/equipos/).
+
+2. Nombres sugeridos:
+   01-equipo.jpg
+   02-equipo.jpg
+   03-equipo.jpg
+   ...
+
+3. En index.html busca "data-carousel=\"equip\"" y agrega una línea por foto:
+
+   <img class="equip-carousel__slide" src="imagenes/equipos/03-equipo.jpg" alt="Descripción breve" loading="lazy" decoding="async">
+
+   La primera lleva también is-active:
+   <img class="equip-carousel__slide is-active" src="imagenes/equipos/01-equipo.jpg" ...>
+
+4. Tamaño: 960 × 640 px (horizontal), máx. ~400 KB cada una.
+
+5. Cambian solas cada 5.5 segundos. Los puntitos abajo permiten elegir foto.

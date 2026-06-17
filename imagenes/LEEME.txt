@@ -1,0 +1,55 @@
+GUÍA DE FOTOS — Equipos y Servicios AG
+======================================
+
+No necesitas programar. Solo reemplaza archivos en esta carpeta
+(con el MISMO nombre) y recarga la página con Ctrl+F5.
+
+
+¿QUÉ FOTO VA EN CADA PARTE?
+---------------------------
+
+┌─────────────────────────────────────────────────────────────┐
+│  INICIO (carrusel arriba)                                   │
+│  Carpeta: imagenes/hero/                                    │
+│  Archivos: 01-laboratorio.jpg, 02-equipos.jpg, 03-otra.jpg  │
+│  Ver guía: imagenes/hero/LEEME.txt                          │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│  SECCIÓN SERVICIOS (foto ancha del laboratorio)             │
+│  Archivo: imagenes/foto-servicios.jpg                       │
+│  Pon aquí: mesa de trabajo, brazo robot, personal en lab    │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│  SECCIÓN EQUIPOS (carrusel animado)                           │
+│  Carpeta: imagenes/equipos/                                 │
+│  Archivos: 01-equipo.jpg, 02-equipo.jpg, 03-otro.jpg        │
+│  Ver guía: imagenes/equipos/LEEME.txt                       │
+└─────────────────────────────────────────────────────────────┘
+
+
+PASOS PARA CAMBIAR UNA FOTO
+---------------------------
+
+1. Toma o elige tu foto (horizontal, buena luz).
+2. Comprímela si pesa más de 1 MB (squoosh.app o fotos del celular).
+3. Renómbrala EXACTAMENTE como arriba (ej. foto-servicios.jpg).
+4. Cópiala a la carpeta imagenes/ (reemplaza el archivo viejo).
+5. Abre la página y pulsa Ctrl+F5 (recarga sin caché).
+
+
+TAMAÑOS RECOMENDADOS
+--------------------
+
+  foto-servicios.jpg  →  1600 × 1066 px  (horizontal)
+  foto-equipos.jpg    →   960 × 640 px   (horizontal)
+  hero/*.jpg          →  1920 × 1080 px  (horizontal)
+
+
+ARCHIVOS VIEJOS (ya no se usan en el sitio)
+-------------------------------------------
+
+  laboratorio.jpg, equipos.jpg, equipos.png
+  Puedes borrarlos o ignorarlos si ya tienes foto-servicios.jpg
+  y foto-equipos.jpg.

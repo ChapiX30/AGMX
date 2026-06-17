@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=index.html#catalogo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Calibración | Equipos y Servicios AG</title>
+    <script>location.replace('index.html#catalogo');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; background: #f4f6f9; color: #0f172a; }
+
+        /* NAV */
+        .cat-nav { background:#1a4a78; padding:.9rem 1.5rem; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(12,25,41,.15); border-bottom:1px solid rgba(255,255,255,.06); }
+        .cat-nav__brand { display:flex; align-items:center; gap:.75rem; text-decoration:none; }
+        .cat-nav__logo { width:40px; height:40px; object-fit:contain; background:transparent; }
+        .cat-nav__name { color:#fff; font-weight:700; font-size:.95rem; line-height:1.2; }
+        .cat-nav__name span { color:#2464A3; }
+        .cat-nav__back { color:#94a3b8; font-size:.85rem; text-decoration:none; display:flex; align-items:center; gap:.4rem; transition:color .2s; }
+        .cat-nav__back:hover { color:#fff; }
+
+        /* HERO */
+        .cat-hero { background:linear-gradient(180deg,#1a4a78 0%,#111d2e 100%); padding:3rem 1.5rem 2.5rem; text-align:center; border-bottom:1px solid rgba(255,255,255,.06); }
+        .cat-hero__eyebrow { display:inline-block; color:#2464A3; font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin:0 0 .75rem; padding:.35rem .85rem; background:rgba(37,99,235,.1); border:1px solid rgba(37,99,235,.15); border-radius:9999px; }
+        .cat-hero__title { color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin:0 0 .75rem; }
+        .cat-hero__desc { color:#94a3b8; font-size:1rem; max-width:580px; margin:0 auto; line-height:1.6; }
+
+        /* GRID DE MAGNITUDES (nav rápido) */
+        .cat-quick-nav { max-width:1100px; margin:2rem auto; padding:0 1.5rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:.85rem; }
+        .cat-qcard { display:flex; flex-direction:column; align-items:center; gap:.45rem; padding:1.1rem .75rem; background:#fff; border:2px solid #e2e8f0; border-radius:1rem; text-decoration:none; color:#1e293b; font-weight:600; font-size:.85rem; text-align:center; transition:border-color .2s,box-shadow .2s,transform .15s; }
+        .cat-qcard:hover { border-color:#2464A3; box-shadow:0 4px 18px rgba(2,132,199,.15); transform:translateY(-3px); color:#2464A3; }
+        .cat-qcard__icon { font-size:1.8rem; line-height:1; }
+
+        /* CONTENIDO */
+        .cat-content { max-width:1100px; margin:0 auto 4rem; padding:0 1.5rem; }
+
+        .cat-block { background:#fff; border-radius:.875rem; padding:2rem; margin-bottom:1.5rem; border:1px solid #d8e0ea; scroll-margin-top:80px; box-shadow:0 4px 24px -4px rgba(12,25,41,.08); }
+        .cat-block__header { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; padding-bottom:1.25rem; border-bottom:1px solid #f1f5f9; }
+        .cat-block__emoji { font-size:2.2rem; line-height:1; flex-shrink:0; }
+        .cat-block__title { font-size:1.35rem; font-weight:700; color:#0f172a; margin:0 0 .25rem; }
+        .cat-block__sub { font-size:.9rem; color:#64748b; margin:0; line-height:1.5; }
+
+        .cat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:.6rem; margin-bottom:1.5rem; }
+        .cat-item { background:#f8fafc; border:1px solid #e2e8f0; border-radius:.6rem; padding:.6rem .9rem; font-size:.875rem; color:#334155; display:flex; align-items:center; gap:.5rem; }
+        .cat-item::before { content:''; width:7px; height:7px; border-radius:50%; background:#2464A3; flex-shrink:0; }
+
+        .cat-cta { display:inline-flex; align-items:center; gap:.4rem; background:#2464A3; color:#fff; text-decoration:none; font-weight:600; font-size:.875rem; padding:.65rem 1.3rem; border-radius:.65rem; transition:background .2s,transform .15s; }
+        .cat-cta:hover { background:#1a4a78; transform:translateX(3px); }
+
+        /* FOOTER */
+        .cat-footer { background:#0f172a; color:#64748b; text-align:center; padding:1.5rem; font-size:.85rem; }
+        .cat-footer a { color:#2464A3; text-decoration:none; }
+
+        @media(max-width:600px) {
+            .cat-grid { grid-template-columns:1fr; }
+            .cat-block { padding:1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="cat-nav">
+        <a href="index.html" class="cat-nav__brand">
+            <img src="assets/logo/isologo-color.svg" alt="Logo AG" class="cat-nav__logo">
+            <span class="cat-nav__name">Equipos y Servicios <span>AG</span></span>
+        </a>
+        <a href="index.html" class="cat-nav__back">
+            ← Regresar al sitio
+        </a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="cat-hero">
+        <p class="cat-hero__eyebrow">Acreditado ISO/IEC 17025:2017 · PJLA</p>
+        <h1 class="cat-hero__title">Catálogo de Calibración</h1>
+        <p class="cat-hero__desc">Selecciona una magnitud para ver todos los instrumentos y equipos que calibramos en esa área con trazabilidad internacional.</p>
+    </div>
+
+    <!-- NAV RÁPIDO -->
+    <div class="cat-quick-nav">
+        <a href="#dimensional" class="cat-qcard"><span class="cat-qcard__icon">📐</span>Dimensional</a>
+        <a href="#mecanica"    class="cat-qcard"><span class="cat-qcard__icon">⚙️</span>Mecánica</a>
+        <a href="#acustica"    class="cat-qcard"><span class="cat-qcard__icon">🔊</span>Acústica</a>
+        <a href="#electrica"   class="cat-qcard"><span class="cat-qcard__icon">⚡</span>Eléctrica</a>
+        <a href="#termodinamica" class="cat-qcard"><span class="cat-qcard__icon">🌡️</span>Termodinámica</a>
+        <a href="#quimica"     class="cat-qcard"><span class="cat-qcard__icon">🧪</span>Química</a>
+        <a href="#masa"        class="cat-qcard"><span class="cat-qcard__icon">⚖️</span>Masa y Fuerza</a>
+        <a href="#tiempo"      class="cat-qcard"><span class="cat-qcard__icon">⏱️</span>Tiempo y Frecuencia</a>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="cat-content">
+
+        <!-- DIMENSIONAL -->
+        <div id="dimensional" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">📐</span>
+                <div>
+                    <h2 class="cat-block__title">Dimensional</h2>
+                    <p class="cat-block__sub">Medición de longitudes, ángulos y geometría de piezas e instrumentos industriales</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Vernier / Calibrador</div>
+                <div class="cat-item">Micrómetro exterior</div>
+                <div class="cat-item">Micrómetro de profundidad</div>
+                <div class="cat-item">Altímetro / Altura gauge</div>
+                <div class="cat-item">Reglas metálicas</div>
+                <div class="cat-item">Flexómetro</div>
+                <div class="cat-item">Calibres de pasador (Pin Gages)</div>
+                <div class="cat-item">Indicador de carátula</div>
+                <div class="cat-item">Goniómetro / Angulómetro</div>
+                <div class="cat-item">Comparador óptico (X/Y/angularidad)</div>
+                <div class="cat-item">Microscopio (linealidad X/Y)</div>
+                <div class="cat-item">Sistema de visión (X/Y/angularidad)</div>
+                <div class="cat-item">Galgas de láminas (Feeler Gauges)</div>
+                <div class="cat-item">Placas de superficie</div>
+                <div class="cat-item">Calibre de rosca (Thread Plug Gage)</div>
+                <div class="cat-item">Rugosímetro (Ra)</div>
+                <div class="cat-item">Medidor de espesores (recubrimiento)</div>
+                <div class="cat-item">Medidor de espesores (ultrasónico)</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración dimensional →</a>
+        </div>
+
+        <!-- MECÁNICA -->
+        <div id="mecanica" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">⚙️</span>
+                <div>
+                    <h2 class="cat-block__title">Mecánica</h2>
+                    <p class="cat-block__sub">Presión, torque y flujo en instrumentos y sistemas industriales</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Manómetro de presión (0–750 psi)</div>
+                <div class="cat-item">Manómetro de presión (0–10 000 psi)</div>
+                <div class="cat-item">Transductor de presión</div>
+                <div class="cat-item">Manómetro de vacío / presión combinada</div>
+                <div class="cat-item">Torquímetro (sentido horario y antihorario)</div>
+                <div class="cat-item">Analizador de torque (0.5–1 355 N·m)</div>
+                <div class="cat-item">Medidor de flujo (gas, 0.5–50 L/min)</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración mecánica →</a>
+        </div>
+
+        <!-- ACÚSTICA -->
+        <div id="acustica" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">🔊</span>
+                <div>
+                    <h2 class="cat-block__title">Acústica</h2>
+                    <p class="cat-block__sub">Medición de nivel de presión sonora para control de ruido industrial y ambiental</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Sonómetro (94 dB @ 1 000 Hz)</div>
+                <div class="cat-item">Sonómetro (104 dB @ 1 000 Hz)</div>
+                <div class="cat-item">Sonómetro (114 dB @ 1 000 Hz)</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración acústica →</a>
+        </div>
+
+        <!-- ELÉCTRICA -->
+        <div id="electrica" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">⚡</span>
+                <div>
+                    <h2 class="cat-block__title">Eléctrica</h2>
+                    <p class="cat-block__sub">Voltaje, corriente, resistencia, capacitancia, inductancia y temperatura por simulación eléctrica</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Medidor de corriente DC (4–20 mA)</div>
+                <div class="cat-item">Medidor de voltaje DC</div>
+                <div class="cat-item">Medidor de voltaje AC</div>
+                <div class="cat-item">Medidor de resistencia (0.1 Ω – 1 GΩ)</div>
+                <div class="cat-item">Medidor de capacitancia</div>
+                <div class="cat-item">Medidor de inductancia (10–1 000 mH)</div>
+                <div class="cat-item">Fuente de voltaje DC y AC</div>
+                <div class="cat-item">Fuente de corriente DC y AC</div>
+                <div class="cat-item">Derivador de corriente (Shunt)</div>
+                <div class="cat-item">Hipot AC y DC (1–40 kV)</div>
+                <div class="cat-item">Megóhmetro</div>
+                <div class="cat-item">Simulador / Indicador RTD 100 Ω</div>
+                <div class="cat-item">Simulador termopar Tipo E, J, K, R, T</div>
+                <div class="cat-item">Controlador de temperatura (indicación)</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración eléctrica →</a>
+        </div>
+
+        <!-- TERMODINÁMICA -->
+        <div id="termodinamica" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">🌡️</span>
+                <div>
+                    <h2 class="cat-block__title">Termodinámica</h2>
+                    <p class="cat-block__sub">Temperatura, humedad y condiciones ambientales en equipos de proceso e inspección</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Hornos, estufas y muflas (50–1 200 °C)</div>
+                <div class="cat-item">Enfriadores, incubadoras y refrigeradores (−140–50 °C)</div>
+                <div class="cat-item">Termohigrómetro (humedad 30–90 % HR)</div>
+                <div class="cat-item">Termohigrómetro (temperatura 23–50 °C)</div>
+                <div class="cat-item">Termómetro infrarrojo / pirómetro (10–400 °C)</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración termodinámica →</a>
+        </div>
+
+        <!-- QUÍMICA -->
+        <div id="quimica" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">🧪</span>
+                <div>
+                    <h2 class="cat-block__title">Química</h2>
+                    <p class="cat-block__sub">Parámetros de calidad del agua y procesos químicos industriales</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Potenciómetro / pH-metro (4, 7 y 10 pH)</div>
+                <div class="cat-item">Conductímetro (84 µS)</div>
+                <div class="cat-item">Conductímetro (1 413 µS)</div>
+                <div class="cat-item">Conductímetro (12 880 µS)</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración química →</a>
+        </div>
+
+        <!-- MASA Y FUERZA -->
+        <div id="masa" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">⚖️</span>
+                <div>
+                    <h2 class="cat-block__title">Masa, Fuerza y Pesaje</h2>
+                    <p class="cat-block__sub">Básculas, balanzas y equipos de fuerza para líneas de producción y laboratorio</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Báscula (5–20 kg, res. 0.0005 g)</div>
+                <div class="cat-item">Báscula (5–200 kg)</div>
+                <div class="cat-item">Báscula de plataforma (200–500 kg)</div>
+                <div class="cat-item">Balanza analítica (1 g–2 100 g)</div>
+                <div class="cat-item">Celda de carga compresión/tensión (29–294 kN)</div>
+                <div class="cat-item">Instrumento de fuerza compresión/tensión</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración de masa y fuerza →</a>
+        </div>
+
+        <!-- TIEMPO Y FRECUENCIA -->
+        <div id="tiempo" class="cat-block">
+            <div class="cat-block__header">
+                <span class="cat-block__emoji">⏱️</span>
+                <div>
+                    <h2 class="cat-block__title">Tiempo y Frecuencia</h2>
+                    <p class="cat-block__sub">Tacómetros, cronómetros y equipos de frecuencia para control de procesos</p>
+                </div>
+            </div>
+            <div class="cat-grid">
+                <div class="cat-item">Tacómetro fotoeléctrico (60–100 000 rpm)</div>
+                <div class="cat-item">Cronómetro / Temporizador (86 400 s)</div>
+                <div class="cat-item">Medidor de frecuencia (1 Hz–100 kHz)</div>
+            </div>
+            <a href="index.html#contacto" class="cat-cta">Cotizar calibración de tiempo y frecuencia →</a>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="cat-footer">
+        <p>&copy; 2026 Equipos y Servicios Especializados AG, S.A. de C.V. &nbsp;·&nbsp; <a href="index.html">Regresar al sitio principal</a></p>
+    </footer>
+
+    <a href="#" class="whatsapp-float" data-whatsapp aria-label="Contactar por WhatsApp" title="Chatea con nosotros en WhatsApp">
+        <span class="whatsapp-float__label">Asesoría en línea</span>
+        <span class="whatsapp-float__btn">
+            <span class="whatsapp-float__ring" aria-hidden="true"></span>
+            <svg class="whatsapp-float__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </span>
+    </a>
+    <script src="main.js" defer></script>
+
+</body>
+</html>

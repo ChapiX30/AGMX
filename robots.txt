@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Reemplace YOUR_DOMAIN por su dominio de producción (ej. https://www.ejemplo.com)
+Sitemap: https://YOUR_DOMAIN/sitemap.xml

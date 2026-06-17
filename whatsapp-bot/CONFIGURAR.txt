@@ -1,0 +1,54 @@
+BOT DE WHATSAPP — Equipos y Servicios AG
+========================================
+
+Hay DOS niveles:
+
+────────────────────────────────────────
+A) YA ACTIVO EN LA PÁGINA (sin costo extra)
+────────────────────────────────────────
+Al pulsar el botón verde flotante se abre un *asistente* que:
+  - Responde al instante en la web
+  - Ofrece opciones (cotización, horario, acreditación…)
+  - Abre WhatsApp con el mensaje ya escrito
+
+Esto ayuda al visitante mientras ustedes no contestan.
+
+────────────────────────────────────────
+B) BOT REAL EN WHATSAPP (responde en el chat)
+────────────────────────────────────────
+Requiere cuenta Meta Business + API oficial.
+
+PASOS RESUMIDOS:
+
+1. Crear cuenta en https://business.facebook.com
+2. En https://developers.facebook.com crear una App
+3. Agregar producto "WhatsApp" → API Setup
+4. Obtener:
+   - Token de acceso (temporal, luego permanente)
+   - Phone number ID
+5. En Vercel (donde está la página), agregar variables:
+   WHATSAPP_TOKEN=...
+   WHATSAPP_PHONE_NUMBER_ID=...
+   WHATSAPP_VERIFY_TOKEN=una_clave_secreta_que_usted_elija
+6. Webhook URL (después de publicar en Vercel):
+   https://SU-DOMINIO.vercel.app/api/whatsapp-webhook
+   Verify token: la misma clave WHATSAPP_VERIFY_TOKEN
+7. Suscribir el webhook al campo "messages"
+
+El código del bot está en:
+  api/whatsapp-webhook.js
+  api/whatsapp-bot.js
+
+────────────────────────────────────────
+C) OPCIÓN RÁPIDA SIN PROGRAMAR (recomendada al inicio)
+────────────────────────────────────────
+En la app *WhatsApp Business* en el celular 81 2430 1739:
+
+  • Herramientas → Mensaje de bienvenida
+  • Herramientas → Mensaje de ausencia
+  • Herramientas → Respuestas rápidas (/cotizacion, /horario)
+
+Meta responde automáticamente sin API.
+
+Para editar las respuestas del bot programado, modifique
+api/whatsapp-bot.js (función buildBotReply).

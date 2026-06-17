@@ -1,0 +1,86 @@
+BOT WHATSAPP EN N8N — SIN IA (sin redundancia)
+==============================================
+
+La IA repite saludos y preguntas porque no guarda bien el estado.
+Este flujo usa REGLAS FIJAS + Google Sheets = cero redundancia.
+
+────────────────────────────────────────
+PASO 1 — Google Sheet
+────────────────────────────────────────
+Crea una hoja "whatsapp_estado" con columnas:
+
+  telefono | step | servicio | instrumento | ciudad | updated
+
+Fila de ejemplo (vacía al inicio):
+  5218124301739 | inicio | | | |
+
+────────────────────────────────────────
+PASO 2 — Flujo n8n (6 nodos)
+────────────────────────────────────────
+
+[1] WhatsApp Trigger
+         ↓
+[2] Google Sheets — Lookup Row
+    - Sheet: whatsapp_estado
+    - Lookup column: telefono
+    - Value: {{ $json.messages[0].from }}
+    (Si no existe fila, el siguiente nodo usa valores vacíos)
+         ↓
+[3] Code — pegar contenido de n8n-code-estado.js
+    Entrada: combinar Trigger + Sheets con un Edit Fields antes:
+
+    Edit Fields (Set) antes del Code:
+      from     = {{ $('WhatsApp Trigger').item.json.messages[0].from }}
+      text     = {{ $('WhatsApp Trigger').item.json.messages[0].text.body }}
+      step     = {{ $('Google Sheets').item.json.step || 'inicio' }}
+      servicio = {{ $('Google Sheets').item.json.servicio || '' }}
+      instrumento = {{ $('Google Sheets').item.json.instrumento || '' }}
+      ciudad   = {{ $('Google Sheets').item.json.ciudad || '' }}
+         ↓
+[4] Google Sheets — Append or Update Row
+    - telefono = {{ $json.from }}
+    - step, servicio, instrumento, ciudad = salida del Code
+         ↓
+[5] WhatsApp — Send Message
+    - To: {{ $json.from }}
+    - Text: {{ $json.reply }}
+         ↓
+[6] (Opcional) Si step = completo → notificar por email/Slack al equipo
+
+────────────────────────────────────────
+PASO 3 — Quitar el AI Agent
+────────────────────────────────────────
+Desactiva o elimina el nodo AI Agent de pruebas.
+Ese flujo gastaba cuota Gemini y causaba redundancia.
+
+────────────────────────────────────────
+CONVERSACIÓN ESPERADA
+────────────────────────────────────────
+
+Cliente: Calibración
+Bot:     Con gusto. Indique marca y modelo del instrumento a calibrar.
+
+Cliente: Mitutoyo CD6"-ASX
+Bot:     Registramos Mitutoyo CD6"-ASX para calibración.
+         ¿En qué ciudad se encuentra y cuántos instrumentos son?
+
+Cliente: Monterrey, 1 pieza
+Bot:     Recibido: Mitutoyo CD6"-ASX, Monterrey, 1 pieza.
+         Un asesor metrológico le enviará la cotización en breve.
+
+(NO vuelve a saludar, NO pregunta calibración vs compra otra vez)
+
+────────────────────────────────────────
+REINICIAR CONVERSACIÓN
+────────────────────────────────────────
+Cliente escribe: nueva
+Bot reinicia el flujo desde inicio.
+
+────────────────────────────────────────
+IA SOLO PARA PREGUNTAS RARAS (opcional)
+────────────────────────────────────────
+Después del Code, añade un Switch:
+  - Si reply está vacío o mensaje no reconocido → AI Agent
+  - Si no → Send Message directo
+
+Así la IA solo entra cuando las reglas no alcanzan.

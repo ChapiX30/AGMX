@@ -1,0 +1,23 @@
+CARRUSEL DEL INICIO (HERO)
+==========================
+
+1. Pon tus fotos AQUÍ en esta carpeta (imagenes/hero/).
+
+2. Nombres sugeridos (en orden):
+   01-laboratorio.jpg
+   02-equipos.jpg
+   03-tu-foto.jpg
+   04-otra.jpg
+   ...
+
+3. En index.html busca "hero__carousel" y agrega una línea por foto:
+
+   <img class="hero__slide" src="imagenes/hero/03-tu-foto.jpg" alt="" loading="lazy" decoding="async">
+
+   La primera foto debe llevar también la clase is-active:
+   <img class="hero__slide is-active" src="imagenes/hero/01-laboratorio.jpg" ...>
+
+4. Tamaño recomendado: 1920 × 1080 px (horizontal), máx. ~500 KB cada una.
+
+5. Si quitas todas las fotos del carrusel, el inicio usará el video
+   (videos/laboratorio.mp4) o el fondo azul si no hay video.
