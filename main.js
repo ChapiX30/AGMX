@@ -1,12 +1,17 @@
 /**
  * Equipos y Servicios AG — sitio estático
- * Configure WHATSAPP_NUMBER, CAREERS_EMAIL, PORTAL_URL, PJLA_SITIO_URL y ACREDITACION_PDF_URL aquí.
+ * Configure WHATSAPP_NUMBER, CAREERS_EMAIL, SITE_URL, PJLA_SITIO_URL y ACREDITACION_PDF_URL aquí.
  */
 (function () {
   'use strict';
 
+  const SITE_URL = 'https://ese-ag.mx';
   const WHATSAPP_NUMBER = '528128742959';
-  const CAREERS_EMAIL = 'rrhh@equiposyserviciosag.com';
+  const CAREERS_EMAIL = 'admin@ese-ag.mx';
+  const GOOGLE_MAPS_URL =
+    'https://www.google.com/maps/search/?api=1&query=Equipos+y+Servicios+Especializados+AG,+Tlaquepaque+140,+Mitras+Sur,+Monterrey,+Nuevo+Le%C3%B3n';
+  const GOOGLE_PROFILE_URL =
+    'https://www.google.com/search?q=Equipos+y+Servicios+Especializados+AG&hl=es';
   const PJLA_SITIO_URL =
     'https://www.pjview.com/clients/pjl/pjla-accredited-labs.cfm?filterLaboratory=equipos+y+servicios&filterCertStatus=Active&OrderBy=company&OldOrderBy=company&PageNo=1';
   const ACREDITACION_PDF_URL = 'acreditacion-pjla.pdf';
@@ -23,12 +28,7 @@
   const WHATSAPP_MSG = encodeURIComponent(WHATSAPP_TOPICS.general);
   const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MSG}`;
 
-  const PANEL_NAMES = ['servicios', 'equipos', 'contacto', 'acreditacion'];
-  const FOCUSABLE =
-    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-
   const body = document.body;
-  let lastFocusedBeforePanel = null;
 
   function whatsappUrl(topic) {
     const text =
@@ -98,13 +98,54 @@
     });
   }
 
+  function wireGoogleLinks() {
+    document.querySelectorAll('[data-google-maps]').forEach((el) => {
+      el.href = GOOGLE_MAPS_URL;
+      if (el.tagName === 'A') {
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+    document.querySelectorAll('[data-google-profile]').forEach((el) => {
+      el.href = GOOGLE_PROFILE_URL;
+      if (el.tagName === 'A') {
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener noreferrer');
+      }
+    });
+  }
+
   function wireAcreditacionLinks() {
     const pjla = document.getElementById('acreditacion-link-pjla');
     const pdf = document.getElementById('acreditacion-link-pdf');
     if (pjla) pjla.href = PJLA_SITIO_URL;
     if (pdf) {
+      const fileName = 'Certificado-Acreditacion-AG.pdf';
       pdf.href = ACREDITACION_PDF_URL;
+      pdf.setAttribute('download', fileName);
       pdf.setAttribute('title', 'Certificado y alcance de acreditación (PDF)');
+
+      pdf.addEventListener('click', (e) => {
+        e.preventDefault();
+        fetch(ACREDITACION_PDF_URL)
+          .then((res) => {
+            if (!res.ok) throw new Error('PDF no disponible');
+            return res.blob();
+          })
+          .then((blob) => {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+          })
+          .catch(() => {
+            window.open(ACREDITACION_PDF_URL, '_blank', 'noopener,noreferrer');
+          });
+      });
     }
   }
 
@@ -137,7 +178,7 @@
         next.name = '_next';
         form.appendChild(next);
       }
-      next.value = `${window.location.origin}${window.location.pathname}?postulacion=ok#bolsa-trabajo`;
+      next.value = `${SITE_URL}/?postulacion=ok#bolsa-trabajo`;
 
       form.addEventListener('submit', (e) => {
         const honey = form.querySelector('.careers-form__honey');
@@ -182,133 +223,6 @@
     }
   }
 
-  function overlayEl(name) {
-    return document.getElementById('overlay-' + name);
-  }
-
-  function btnEl(name) {
-    return document.getElementById('btn-panel-' + name);
-  }
-
-  function sheetEl(name) {
-    const overlay = overlayEl(name);
-    return overlay ? overlay.querySelector('.nav-panel-sheet') : null;
-  }
-
-  function isPanelOpen(name) {
-    const o = overlayEl(name);
-    return o && o.classList.contains('is-open');
-  }
-
-  function anyPanelOpen() {
-    return PANEL_NAMES.some((n) => isPanelOpen(n));
-  }
-
-  function syncBodyScroll() {
-    body.classList.toggle('nav-panel-open', anyPanelOpen());
-  }
-
-  function getFocusables(container) {
-    if (!container) return [];
-    return Array.from(container.querySelectorAll(FOCUSABLE)).filter(
-      (el) => el.offsetParent !== null || el === document.activeElement
-    );
-  }
-
-  function setPanelOpen(name, open) {
-    const o = overlayEl(name);
-    const b = btnEl(name);
-    const sheet = sheetEl(name);
-
-    if (o) {
-      o.classList.toggle('is-open', open);
-      o.setAttribute('aria-hidden', open ? 'false' : 'true');
-    }
-    if (sheet) {
-      sheet.setAttribute('aria-hidden', open ? 'false' : 'true');
-    }
-    if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-    if (open && sheet) {
-      const focusables = getFocusables(sheet);
-      const closeBtn = sheet.querySelector('[data-close-panel]');
-      (closeBtn || focusables[0])?.focus();
-    }
-  }
-
-  function closeAllPanels() {
-    PANEL_NAMES.forEach((n) => setPanelOpen(n, false));
-    syncBodyScroll();
-    if (lastFocusedBeforePanel && typeof lastFocusedBeforePanel.focus === 'function') {
-      lastFocusedBeforePanel.focus();
-      lastFocusedBeforePanel = null;
-    }
-  }
-
-  function openOnly(name) {
-    if (!anyPanelOpen()) {
-      lastFocusedBeforePanel = document.activeElement;
-    }
-    PANEL_NAMES.forEach((n) => setPanelOpen(n, n === name));
-    syncBodyScroll();
-  }
-
-  function togglePanel(name) {
-    if (isPanelOpen(name)) closeAllPanels();
-    else openOnly(name);
-  }
-
-  function trapFocus(e) {
-    const openName = PANEL_NAMES.find((n) => isPanelOpen(n));
-    if (!openName || e.key !== 'Tab') return;
-
-    const sheet = sheetEl(openName);
-    const focusables = getFocusables(sheet);
-    if (focusables.length === 0) return;
-
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  }
-
-  function initPanels() {
-    PANEL_NAMES.forEach((name) => {
-      const btn = btnEl(name);
-      if (btn) btn.addEventListener('click', () => togglePanel(name));
-    });
-
-    document.querySelectorAll('[data-close-panel]').forEach((el) => {
-      el.addEventListener('click', () => {
-        const name = el.getAttribute('data-close-panel');
-        if (name && PANEL_NAMES.includes(name)) {
-          setPanelOpen(name, false);
-          syncBodyScroll();
-          if (lastFocusedBeforePanel) {
-            lastFocusedBeforePanel.focus();
-            lastFocusedBeforePanel = null;
-          }
-        }
-      });
-    });
-
-    document.querySelectorAll('.panel-section-link').forEach((link) => {
-      link.addEventListener('click', () => closeAllPanels());
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeAllPanels();
-      trapFocus(e);
-    });
-
-  }
-
   function initNavScroll() {
     const header = document.getElementById('site-header');
     if (!header) return;
@@ -317,14 +231,6 @@
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-  }
-
-  function initFooterLinks() {
-    const footerAcr = document.getElementById('footer-acreditacion');
-    const acrBtn = document.getElementById('btn-panel-acreditacion');
-    if (footerAcr && acrBtn) {
-      footerAcr.addEventListener('click', () => acrBtn.click());
-    }
   }
 
   function setHeaderHeight() {
@@ -817,15 +723,14 @@
   }
 
   wireWhatsAppLinks();
+  wireGoogleLinks();
   wireAcreditacionLinks();
   wireCareersSection();
   initWaAssistant();
   setHeaderHeight();
   initCatalogView();
-  initPanels();
   initNavScroll();
   initMobileNav();
-  initFooterLinks();
   initStagger();
   initHeroMedia();
   initEquipCarousel();

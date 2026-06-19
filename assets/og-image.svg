@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Equipos y Servicios AG  Calibración acreditada ISO/IEC 17025">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2238"/>
+      <stop offset="45%" stop-color="#1a4a78"/>
+      <stop offset="100%" stop-color="#2464a3"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="120" r="160" fill="#2464a3" opacity="0.22"/>
+  <circle cx="180" cy="520" r="200" fill="#0ea5e9" opacity="0.12"/>
+  <g opacity="0.08">
+    <path d="M0 420 H1200" stroke="#fff" stroke-width="1"/>
+    <path d="M0 480 H1200" stroke="#fff" stroke-width="1"/>
+    <path d="M120 0 V630" stroke="#fff" stroke-width="1"/>
+    <path d="M240 0 V630" stroke="#fff" stroke-width="1"/>
+  </g>
+  <g transform="translate(88, 118)" filter="url(#glow)">
+    <polygon fill="#2464a3" points="0,120 55,0 110,120"/>
+    <polygon fill="#3d7fc4" opacity="0.85" points="55,28 82,78 28,78"/>
+  </g>
+  <text x="230" y="175" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" letter-spacing="2">EQUIPOS Y SERVICIOS</text>
+  <text x="230" y="220" fill="#bae6fd" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="300" letter-spacing="10">AG</text>
+  <rect x="88" y="255" width="120" height="4" rx="2" fill="url(#accent)"/>
+  <text x="88" y="330" fill="#f8fafc" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="800">Calibración acreditada</text>
+  <text x="88" y="395" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="500">ISO/IEC 17025:2017 · Monterrey, N.L.</text>
+  <g transform="translate(88, 440)">
+    <rect width="290" height="54" rx="27" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+    <text x="145" y="35" fill="#e0f2fe" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="middle">Acreditación 107984</text>
+  </g>
+  <g transform="translate(400, 440)">
+    <rect width="230" height="54" rx="27" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+    <text x="115" y="35" fill="#cbd5e1" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" text-anchor="middle">Cert. L25-682</text>
+  </g>
+  <text x="88" y="575" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500">ese-ag.mx · Tlaquepaque 140, Mitras Sur</text>
+</svg>

@@ -18,7 +18,7 @@ function buildBotReply(incomingText) {
   if (!t.trim() || /^(hola|buenas|buenos|hi|hello|hey|saludos)/.test(t)) {
     return (
       `¡Hola! Gracias por contactar a *${LAB_NAME}*.\n\n` +
-      'Somos laboratorio de calibración acreditado ISO/IEC 17025 (PJLA · L25-682).\n\n' +
+      'Somos laboratorio de calibración acreditado ISO/IEC 17025 (PJLA · Acreditación 107984).\n\n' +
       'Escriba una opción o palabra clave:\n' +
       '• *Cotización* — calibración o equipos\n' +
       '• *Horario* — días y horarios de atención\n' +
@@ -55,7 +55,7 @@ function buildBotReply(incomingText) {
 
   if (/horario|hora|abierto|atienden|cuando/.test(t)) {
     return (
-      '*Horario de atención:* Lun–Vie 8:00 – 18:00\n' +
+      '*Horario de atención:* Lun–Vie 7:00 – 17:00\n' +
       '*Cobertura:* Monterrey, García y zona metropolitana.\n\n' +
       'Fuera de horario recibimos su mensaje y le respondemos el siguiente día hábil.'
     );
@@ -64,7 +64,7 @@ function buildBotReply(incomingText) {
   if (/acredit|iso|17025|pjla|l25/.test(t)) {
     return (
       'Estamos acreditados bajo *ISO/IEC 17025:2017* ante PJLA.\n' +
-      'Certificado: *L25-682*.\n\n' +
+      'Acreditación: *107984* · Certificado: *L25-682*.\n\n' +
       'Verifique en el sitio oficial PJLA o solicite copia del certificado con nuestro equipo.'
     );
   }
@@ -82,7 +82,7 @@ function buildBotReply(incomingText) {
 
   return (
     `Gracias por escribir a *${LAB_NAME}*.\n\n` +
-    'Recibimos su mensaje. Un especialista le responderá en un plazo típico de *24–48 horas* (Lun–Vie 8:00–18:00).\n\n' +
+    'Recibimos su mensaje. Un especialista le responderá en un plazo típico de *24–48 horas* (Lun–Vie 7:00–17:00).\n\n' +
     'Si es urgente, indique *URGENTE* y el instrumento involucrado.'
   );
 }
